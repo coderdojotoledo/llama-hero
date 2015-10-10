@@ -60,8 +60,7 @@ Level1.prototype.update = function() {
         }
     }
 
-    if (this.jumpButton.isDown && this.hero.body.onFloor() && this.game.time.now > this.jumpTimer) {
-        this.hero.body.velocity.y = -250;
-        this.jumpTimer = this.game.time.now + 750;
+    if (this.jumpButton.isDown) {
+        this.hero.body.velocity.y = -100;
     }
 };
