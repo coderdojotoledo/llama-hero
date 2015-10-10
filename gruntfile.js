@@ -79,7 +79,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('copy-dev', ['copy:dev', 'copy:vendor']);
 
-    grunt.registerTask('dev', ['clean:dev', 'uglify:dev', 'copy-dev', 'open', 'connect', 'watch:dev']);
+    grunt.registerTask('dev', ['clean:dev', 'uglify:dev', 'copy-dev', 'watch:dev']);
 
     grunt.registerTask('default', 'dev');
 };
