@@ -22,7 +22,9 @@ module.exports = function(grunt) {
         dev: {
             files: {
                 "build/js/llama-hero.min.js": [
-                    "app/src/**/*.js"
+                    "app/src/**/*.js",
+                    "!app/src/Init.js",
+                    "app/src/Init.js"
                 ]
             }
         }
