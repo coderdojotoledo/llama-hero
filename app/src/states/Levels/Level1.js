@@ -14,6 +14,8 @@ Level1.prototype = {
     preload: function() {
         this.game.load.image("background", "assets/dark_background.png");
         this.game.load.spritesheet("llama", "assets/llamahero_spritesheet.png", 226, 214);
+        this.game.load.spritesheet("enemy", "assets/enemy_spritesheet.png", 250, 250);
+
     },
     create: function() {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -29,12 +31,19 @@ Level1.prototype = {
         this.hero.scale.setTo(0.5, 0.5);
         this.hero.anchor.setTo(.5, 1);
 
-        this.game.physics.enable(this.hero, Phaser.Physics.ARCADE);
         this.game.physics.arcade.gravity.y = 250;
 
+        this.enemy = this.game.add.sprite(500, 400, "enemy");
+        this.enemy.animations.add("idle");
+        this.enemy.animations.play("idle", 5000, true);
+        
+        
+        this.game.physics.enable( [ this.hero, this.enemy], Phaser.Physics.ARCADE);
+        
         this.hero.body.bounce.y = 0.2;
         this.hero.body.collideWorldBounds = true;
-
+        this.enemy.body.allowGravity = false;
+        this.enemy.animations.getAnimation('idle').delay = 500
 
         this.cursors = this.game.input.keyboard.createCursorKeys();
         this.jumpButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -60,8 +69,8 @@ Level1.prototype.update = function() {
         }
     }
 
-    if (this.jumpButton.isDown && this.hero.body.onFloor() && this.game.time.now > this.jumpTimer) {
-        this.hero.body.velocity.y = -250;
+    if (this.jumpButton.isDown) {
+        this.hero.body.velocity.y = -100;
         this.jumpTimer = this.game.time.now + 750;
     }
 };
