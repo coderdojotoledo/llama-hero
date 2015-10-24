@@ -1,5 +1,6 @@
 var Level1 = function(game) {
     this.hero = null;
+    this.enemies = [];
 
     this.settings = {
         facing: "right",
@@ -14,6 +15,7 @@ Level1.prototype = {
     preload: function() {
         this.game.load.image("background", "assets/dark_background.png");
         this.game.load.spritesheet("llama", "assets/llamahero_spritesheet.png", 226, 214);
+        this.game.load.spritesheet("enemy", "assets/enemy_spritesheet.png", 250, 250);
     },
     create: function() {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -35,6 +37,7 @@ Level1.prototype = {
         this.hero.body.bounce.y = 0.2;
         this.hero.body.collideWorldBounds = true;
 
+        this.enemies.push(new Enemy(this.game));
 
         this.cursors = this.game.input.keyboard.createCursorKeys();
         this.jumpButton = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
@@ -43,6 +46,10 @@ Level1.prototype = {
 
 Level1.prototype.update = function() {
     this.hero.body.velocity.x = 0;
+    
+    this.enemies.forEach(function(enemy) {
+        enemy.updateDirection();
+    });
 
     if (this.cursors.left.isDown) {
         this.hero.body.velocity.x = -150;
