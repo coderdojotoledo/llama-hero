@@ -8,16 +8,15 @@ var Enemy = function(game) {
     
     this.facing = this.vx > 0 ? "left" : "right";
 
-
     this.enemySprite = game.add.sprite(this.x,this.y,"enemy");
     game.physics.enable(this.enemySprite, Phaser.Physics.ARCADE);
 
     this.enemySprite.anchor.setTo(0.5, 0.5);
     this.enemySprite.body.collideWorldBounds = true;
-    this.enemySprite.body.bounce.setTo(1, 1);
-    this.enemySprite.body.velocity.x = this.vx;
-    this.enemySprite.body.velocity.y = this.vy;
-    this.enemySprite.body.immovable = true;
+    // this.enemySprite.body.bounce.setTo(1, 1);
+    // this.enemySprite.body.velocity.x = this.vx;
+    // this.enemySprite.body.velocity.y = this.vy;
+    // this.enemySprite.body.immovable = true;
 }
 
 Enemy.prototype = {
